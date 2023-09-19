@@ -3,7 +3,7 @@ const getAllDonuts = async () => {
     .then(response => response.json())
 }
 
-//Functions to retrive the Most sugary donut
+//Exercise 2.1 Functions to retrive the Most sugary donut
 const getSugaryDonut = async () => {
     try{
         const result = await getAllDonuts();
@@ -28,42 +28,10 @@ const manageSugaryDonuts = (donuts) => {
     
 }
 
-//Funtcions to retrieve the Ironiest donut
+//Exercise 2.2
 
 
-// const getIronyDonuts = async () => {
-//     try{
-//         const alldonuts = await getAllDonuts();
-//         manageIronDonuts(alldonuts);
-//     }
-//     catch (error){
-//         console.log(error);
-//     }
-// }
-
-// const manageIronDonuts = (donuts) => {
-//     const getIronValues =  donuts.items.item.map(donut => {
-//         const ironValue =  donut.nutrition_facts.nutrition.vitamines.filter( (vitamine) =>  { return vitamine.percent && vitamine.type === "Iron"  } );
-//         return ironValue;
-//     });
-//     console.log(getIronValues);
-// }
-
-// const manageIronDonuts = (donuts) => {
-    
-
-
-//     const getNamesandVitamines  =  donuts.items.item.map( donut => { return { Name: donut.name, Vitamines: JSON.stringify(donut.nutrition_facts.nutrition.vitamines)}});
-
-//     const mapVitamines = getNamesandVitamines.filter( SingleDonut => { return { Name: SingleDonut.name, Vitamines: SingleDonut.vitamines.type === "Iron"}})   
-
-//     console.log(mapVitamines);
-// }
-
-
-//Functions to retrieve the Proteinest donut
-
-
+//Exercise 2.3 Functions to retrieve the Proteinest donut
 const getProteinestDonut = async() => {
     try{
         const proteinDonuts = await getAllDonuts();
@@ -88,7 +56,7 @@ const findProteinestDonut = (donuts) => {
 }
 
 
-//Functions to retrieve the less fiber donut
+//Exercise 2.4 Functions to retrieve the less fiber donut
 const getLessFiberDonut = async () => {
     try{
         const getFiberDonuts = await getAllDonuts();
@@ -119,10 +87,10 @@ const manageFiberDonuts = (donuts) => {
 }
 
 
-//getIronyDonuts();
-// getProteinestDonut();
-// getSugaryDonut();
-// getLessFiberDonut();
+getIronyDonuts();
+getProteinestDonut();
+getSugaryDonut();
+getLessFiberDonut();
 
 
 
@@ -133,9 +101,9 @@ const manageFiberDonuts = (donuts) => {
 const retrieveDonuts = async () => {
     try{
         const allDonuts = await getAllDonuts();
-        // findNameAndCalories(allDonuts);
-        // findNameAndCarbs(allDonuts);
-        //getAVGofDonuts(allDonuts)
+        findNameAndCalories(allDonuts);
+        findNameAndCarbs(allDonuts);
+        getAVGofDonuts(allDonuts)
         getSumOfSaturatedFats(allDonuts);
     }catch(error){
         console.log(error);
@@ -150,11 +118,11 @@ const findNameAndCalories = (donuts) => {
 
 }
 //Exercise 2.2
-const findNameAndCarbs = (donuts) => {
-    const nameAndCarbsRetrieved = donuts.items.item.map( donut => { return { Name: donut.name, Carbohidrates: donut.nutrition_facts.nutrition.carbohydrate}})
-    //const desglosedCarbs = nameAndCarbsRetrieved.Carbohidrates.carbs_detail.map(item => item.type)
-    console.log(nameAndCarbsRetrieved.Carbohidrates.carbs_detail);
-}
+// const findNameAndCarbs = (donuts) => {
+//     const nameAndCarbsRetrieved = donuts.items.item.map( donut => { return { Name: donut.name, Carbohidrates: donut.nutrition_facts.nutrition.carbohydrate}})
+//     const desglosedCarbs = nameAndCarbsRetrieved.Carbohidrates.carbs_detail.map(item => item.type)
+//     console.log(nameAndCarbsRetrieved.Carbohidrates.carbs_detail);
+// }
 
 //Exercise 2.3
 const getAVGofDonuts = (donuts) => {
@@ -171,8 +139,4 @@ const getSumOfSaturatedFats = (donuts) => {
     console.log(saturatedFats);
 }
 
-<<<<<<< HEAD
 retrieveDonuts();
-=======
-retrieveDonuts();
->>>>>>> 71e1e23e9cb9d11b61cbc0c08f57eca16f567af5
