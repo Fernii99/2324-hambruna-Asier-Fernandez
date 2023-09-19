@@ -6,14 +6,14 @@ const getAllDonuts = async () => {
     .catch(reject => reject.json())
 }
 
-//Exercise 2.1 Functions to retrive the Most sugary donut
+//Exercise 1.1 Functions to retrive the Most sugary donut
 const getDonuts = async () => {
     try{
         const result = await getAllDonuts();
-        manageSugaryDonuts(result);
+        // manageSugaryDonuts(result);
         //getIronDonuts(result);
-        findProteinestDonut(result);
-        manageFiberDonuts(result);
+        // findProteinestDonut(result);
+        // manageFiberDonuts(result);
 
     }catch (error){
         console.log(error);
@@ -35,20 +35,40 @@ const manageSugaryDonuts = (donuts) => {
     
 }
 
-//Exercise 2.2
+//Exercise 1.2
 // const getIronDonuts = (donuts) => {
-//     const ironInDonuts = donuts.items.item.map( donut => {
-//         donut.nutrition_facts.nutrition.filter();
+//     const ironInDonuts = donuts.items.item.map( 
+//         // donut => {
+//         //     return {
+//         //         name: donut.name,
+//         //         ironType: donut.nutrition_facts.nutrition.vitamines.map(valueType => { return valueType.type}),
+//         //         ironPercent: donut.nutrition_facts.nutrition.vitamines.map(valueType=> valueType.percent),
+//         //     }
+//         // }
+//         // )
 
-//     })
+//         donut =>  donut.nutrition_facts.nutrition.vitamines.filter(data => data.type === "Iron")
+               
+//     )
+
+
+
+
+//     function isIron(vitamineType){
+//         return vitamineType
+//     }
+//     //const ironPositionArray = ironInDonuts.ironType.findIndex((type)=>type ==="Iron");
     
+//     // ironInDonuts.filter(values => values..filter(value => {
+//     //     if(value.percent)
+//     // } value.percent));
+
 //     console.log(ironInDonuts);
+
 // }
 
 
-
-
-//Exercise 2.3 Functions to retrieve the Proteinest donut
+//Exercise 1.3 Functions to retrieve the Proteinest donut
 const findProteinestDonut = (donuts) => { 
 
     const filterProteinInDonut = donuts.items.item.map( donut =>{
@@ -64,7 +84,7 @@ const findProteinestDonut = (donuts) => {
 }
 
 
-//Exercise 2.4 Functions to retrieve the less fiber donut
+//Exercise 1.4 Functions to retrieve the less fiber donut
 
 const manageFiberDonuts = (donuts) => {
     
@@ -97,9 +117,9 @@ getDonuts();
 const retrieveDonuts = async () => {
     try{
         const allDonuts = await getAllDonuts();
-        findNameAndCalories(allDonuts);
-        getAVGofDonuts(allDonuts)
-        getSumOfSaturatedFats(allDonuts);
+        // findNameAndCalories(allDonuts);
+        // getAVGofDonuts(allDonuts)
+        // getSumOfSaturatedFats(allDonuts);
     }catch(error){
         console.log(error);
     }
@@ -141,8 +161,8 @@ retrieveDonuts();
 const donutsAndButters = async () => {
     try{
         const allDonuts = await getAllDonuts();
-        getAllDonutsAndButters(allDonuts);
-        getAllDonutsAndToppings(allDonuts);
+        // getAllDonutsAndButters(allDonuts);
+        // getAllDonutsAndToppings(allDonuts);
     }catch(error){
         console.log(error);
     }
@@ -172,3 +192,53 @@ const getAllDonutsAndToppings = (donuts) => {
 }
 
 donutsAndButters();
+
+//Exercises group 4
+const calculateAmountOfDonuts = async () => {
+    try{
+        const allDonuts = await getAllDonuts();
+       // getBuyableDonuts(allDonuts);
+    }catch(error){
+        console.log(error);
+    }
+}
+
+const getBuyableDonuts = (donuts) => {
+
+    const buyableDonuts = donuts.items.item.map(
+        donut => { 
+            return {
+               name: donut.name,
+               BuyableDonuts: Math.round((4 / Number(donut.ppu))*1)/1,
+               MoneyLeftovers: Math.round((4 % Number(donut.ppu))*10)/10
+            }
+        }
+    )
+    console.log(buyableDonuts);
+}
+
+calculateAmountOfDonuts();
+
+
+//Exercises group 4
+const makeChangesInDonuts = async () => {
+    try{
+        const allDonuts = await getAllDonuts();
+        modifyColeterol(allDonuts);
+    }catch(error){
+        console.log(error);
+    }
+}
+
+const modifyColeterol = (donuts) => {
+
+    const colesterolDonuts = donuts.items.item.filter(
+        donut => {
+            const cholesterolDonut = donut.nutrition_facts.nutrition.cholesterol.amount.substring(3, -1) >= 12
+        }
+        )
+        console.log(colesterolDonuts);
+
+    }
+
+makeChangesInDonuts();
