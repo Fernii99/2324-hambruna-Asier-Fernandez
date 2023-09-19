@@ -171,4 +171,8 @@ const getSumOfSaturatedFats = (donuts) => {
     console.log(saturatedFats);
 }
 
+<<<<<<< HEAD
 retrieveDonuts();
+=======
+retrieveDonuts();
+>>>>>>> 71e1e23e9cb9d11b61cbc0c08f57eca16f567af5
