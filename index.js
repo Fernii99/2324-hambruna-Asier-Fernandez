@@ -1,13 +1,20 @@
+//import { getAllDonuts } from "./package.json";
+
 const getAllDonuts = async () => {
     return fetch ('https://gist.githubusercontent.com/Oskar-Dam/62e7175dc542af53a9d18cb292422425/raw/a6cce2b68ea13a77ec5ea7bdfb4df8f23f9ae95f/donuts.json')
     .then(response => response.json())
+    .catch(reject => reject.json())
 }
 
 //Exercise 2.1 Functions to retrive the Most sugary donut
-const getSugaryDonut = async () => {
+const getDonuts = async () => {
     try{
         const result = await getAllDonuts();
         manageSugaryDonuts(result);
+        //getIronDonuts(result);
+        findProteinestDonut(result);
+        manageFiberDonuts(result);
+
     }catch (error){
         console.log(error);
     }   
@@ -29,18 +36,19 @@ const manageSugaryDonuts = (donuts) => {
 }
 
 //Exercise 2.2
+// const getIronDonuts = (donuts) => {
+//     const ironInDonuts = donuts.items.item.map( donut => {
+//         donut.nutrition_facts.nutrition.filter();
+
+//     })
+    
+//     console.log(ironInDonuts);
+// }
+
+
 
 
 //Exercise 2.3 Functions to retrieve the Proteinest donut
-const getProteinestDonut = async() => {
-    try{
-        const proteinDonuts = await getAllDonuts();
-        findProteinestDonut(proteinDonuts);
-    }catch (error){
-        console.log(error);
-    }
-}
-
 const findProteinestDonut = (donuts) => { 
 
     const filterProteinInDonut = donuts.items.item.map( donut =>{
@@ -57,15 +65,6 @@ const findProteinestDonut = (donuts) => {
 
 
 //Exercise 2.4 Functions to retrieve the less fiber donut
-const getLessFiberDonut = async () => {
-    try{
-        const getFiberDonuts = await getAllDonuts();
-        manageFiberDonuts(getFiberDonuts);
-    }
-    catch (error){
-        console.log(error);
-    }
-}
 
 const manageFiberDonuts = (donuts) => {
     
@@ -87,10 +86,7 @@ const manageFiberDonuts = (donuts) => {
 }
 
 
-getIronyDonuts();
-getProteinestDonut();
-getSugaryDonut();
-getLessFiberDonut();
+getDonuts();
 
 
 
@@ -102,7 +98,6 @@ const retrieveDonuts = async () => {
     try{
         const allDonuts = await getAllDonuts();
         findNameAndCalories(allDonuts);
-        findNameAndCarbs(allDonuts);
         getAVGofDonuts(allDonuts)
         getSumOfSaturatedFats(allDonuts);
     }catch(error){
@@ -118,17 +113,13 @@ const findNameAndCalories = (donuts) => {
 
 }
 //Exercise 2.2
-// const findNameAndCarbs = (donuts) => {
-//     const nameAndCarbsRetrieved = donuts.items.item.map( donut => { return { Name: donut.name, Carbohidrates: donut.nutrition_facts.nutrition.carbohydrate}})
-//     const desglosedCarbs = nameAndCarbsRetrieved.Carbohidrates.carbs_detail.map(item => item.type)
-//     console.log(nameAndCarbsRetrieved.Carbohidrates.carbs_detail);
-// }
+
 
 //Exercise 2.3
 const getAVGofDonuts = (donuts) => {
     const donutCalories = donuts.items.item.map( donut => donut.nutrition_facts.nutrition.calories)
     const sumOfCalories = donutCalories.reduce((accumulator, currentValue) =>{
-        return accumulator +currentValue;
+        return accumulator + currentValue;
     })
     console.log("The average of calories in the donuts is : " + sumOfCalories / donutCalories.length);
 }
@@ -136,7 +127,48 @@ const getAVGofDonuts = (donuts) => {
 //Exercise 2.4
 const getSumOfSaturatedFats = (donuts) => {
     const saturatedFats = donuts.items.item.map(donut => Number(donut.nutrition_facts.nutrition.fat.fat_type.saturated.slice(0, -1)));
-    console.log(saturatedFats);
+    const sumOfSaturatedFats = saturatedFats.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+    })
+    console.log( "The summ of all saturated fats is: " +  sumOfSaturatedFats );
 }
 
 retrieveDonuts();
+
+
+
+//Exercises group 3 
+const donutsAndButters = async () => {
+    try{
+        const allDonuts = await getAllDonuts();
+        getAllDonutsAndButters(allDonuts);
+        getAllDonutsAndToppings(allDonuts);
+    }catch(error){
+        console.log(error);
+    }
+}
+
+const getAllDonutsAndButters = (donuts) => {
+    const getButters = donuts.items.item.map( donut => { return {
+        Nombre: donut.name,
+        Masas: JSON.stringify(donut.batters.batter.map( batter => batter.type))}}  
+    );
+
+    console.log("\n NOMBRES DE LOS DONUTS Y SUS MASAS: ");
+    console.log( getButters);
+    
+}
+
+const getAllDonutsAndToppings = (donuts) => {
+
+    const getToppings = donuts.items.item.map( donut => { return {
+        Nombre: donut.name,
+        Masas: JSON.stringify(donut.topping.map( topping => topping.type))}}  
+    );
+
+    console.log("\n NOMBRES DE LOS DONUTS Y SUS MASAS:");
+    console.log( getToppings );
+
+}
+
+donutsAndButters();
