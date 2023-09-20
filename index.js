@@ -10,10 +10,10 @@ const getAllDonuts = async () => {
 const getDonuts = async () => {
     try{
         const result = await getAllDonuts();
-        // manageSugaryDonuts(result);
+        manageSugaryDonuts(result);
         //getIronDonuts(result);
-        // findProteinestDonut(result);
-        // manageFiberDonuts(result);
+        findProteinestDonut(result);
+        manageFiberDonuts(result);
 
     }catch (error){
         console.log(error);
@@ -117,9 +117,9 @@ getDonuts();
 const retrieveDonuts = async () => {
     try{
         const allDonuts = await getAllDonuts();
-        // findNameAndCalories(allDonuts);
-        // getAVGofDonuts(allDonuts)
-        // getSumOfSaturatedFats(allDonuts);
+        findNameAndCalories(allDonuts);
+        getAVGofDonuts(allDonuts)
+        getSumOfSaturatedFats(allDonuts);
     }catch(error){
         console.log(error);
     }
@@ -129,7 +129,7 @@ const retrieveDonuts = async () => {
 const findNameAndCalories = (donuts) => {
 
     const nameAndCaloriesRetrieved = donuts.items.item.map( donut => { return { Name: donut.name, Calories: donut.nutrition_facts.nutrition.calories}})
-    //console.log("Listado de los donuts y sus respectivas calorias: " + JSON.stringify(nameAndCaloriesRetrieved) );
+    console.log("Listado de los donuts y sus respectivas calorias: " + JSON.stringify(nameAndCaloriesRetrieved) );
 
 }
 //Exercise 2.2
